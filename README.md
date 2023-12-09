@@ -9,7 +9,8 @@
 ### Contents
 
 #### Basic
-[1. Naming convention](./Basic/1_Prog_NamingConv.cpp)
+1. [Naming conventions](./Basic/1_Prog_NamingConv.cpp)
+2. [Calling conventions](./Basic/2_Prog_CallingConv.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.

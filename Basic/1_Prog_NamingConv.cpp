@@ -41,8 +41,10 @@ extern "C" void func_c()
 /*******************************************/
 
 int main()
-{
+{ // Prolog
+	// Body
 	func_cpp();
 	func_c();
-	return 0;
+	// Epilog
+	return 0; // return type	
 }
