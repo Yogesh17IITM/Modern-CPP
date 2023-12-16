@@ -13,6 +13,7 @@
 2. [Calling conventions](./Basic/2_Prog_CallingConv.cpp)
 3. [Default Class C'tor synthesization](./Basic/3_Prog_Default_Ctor.cpp)
 4. [Virtual Functions](./Basic/4_Virtual_Functions.cpp)
+5. [Multiple Inheritance](./Basic/5_VirtualFunc_MultipleInheritance.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
