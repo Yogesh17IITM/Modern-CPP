@@ -14,9 +14,12 @@
 3. [Default Class C'tor synthesization](./Basic/3_Prog_Default_Ctor.cpp)
 4. [Virtual Functions](./Basic/4_Virtual_Functions.cpp)
 5. [Multiple Inheritance](./Basic/5_VirtualFunc_MultipleInheritance.cpp)
+6. [Class Object Destruction](./Basic/6_rValue_and_DtorScope.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
 
-
+### Tips
+For searching a particular line in .asm file, type "; linenumber" in find window.
+*Example: ; 20*
 
