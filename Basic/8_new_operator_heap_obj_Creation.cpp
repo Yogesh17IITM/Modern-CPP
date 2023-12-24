@@ -3,6 +3,7 @@
 *	- Heap object creation using 'new' operator
 *   - override the operator 'new' and 'delete'
 *   - prohibiting the heap object creation
+*   - prohibiting object copying
 */
 
 #include<iostream>
@@ -25,12 +26,7 @@ public:
         cout << "d'tor" << endl;
         // throw 1;	// Do not throw exception from d'tor. Program will crash.
     }
-
-    myclass(const myclass& obj)
-    {
-        cout << "copy c'tor" << endl;
-    }
-
+        
     /*  During object creation on heap, the following 'new' operator gets called first
         then followed by the c'tor
     */
@@ -70,6 +66,9 @@ public:
     static void* operator new[](size_t size) = delete;
     static void operator delete[](void* pv) = delete;
 
+    // Similarly, to prevent copying,
+    myclass(const myclass& obj) = delete;
+    myclass &operator=(const myclass& obj) = delete;
     
 };
 

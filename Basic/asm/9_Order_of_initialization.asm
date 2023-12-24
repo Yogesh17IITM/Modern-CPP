@@ -5,10 +5,6 @@ include listing.inc
 INCLUDELIB MSVCRTD
 INCLUDELIB OLDNAMES
 
-PUBLIC	?gHeap@myclass@@0_NA				; myclass::gHeap
-_BSS	SEGMENT
-?gHeap@myclass@@0_NA DB 01H DUP (?)			; myclass::gHeap
-_BSS	ENDS
 msvcjmc	SEGMENT
 __97D3638F_vcruntime_new@h DB 01H
 __741AE07E_corecrt_math@h DB 01H
@@ -56,13 +52,13 @@ __D23FE460_xlocale DB 01H
 __4495FA24_xiosbase DB 01H
 __4CB88277_xlocnum DB 01H
 __845859A3_ios DB 01H
-__18F94146_8_new_operator_heap_obj_Creation@cpp DB 01H
+__5D17BE46_9_Order_of_initialization@cpp DB 01H
 __A2FF0B9E_istream DB 01H
 __C12F3EA4_ostream DB 01H
 __74AB0D97_streambuf DB 01H
+__038A2AA6_iterator DB 01H
 __B30C2184_iosfwd DB 01H
 __1347750E_utility DB 01H
-__038A2AA6_iterator DB 01H
 __E458E21C_xstddef DB 01H
 __F54903A0_xatomic@h DB 01H
 msvcjmc	ENDS
@@ -74,11 +70,6 @@ PUBLIC	?length@?$_Narrow_char_traits@DH@std@@SA_KQEBD@Z ; std::_Narrow_char_trai
 PUBLIC	?eq_int_type@?$_Narrow_char_traits@DH@std@@SA_NAEBH0@Z ; std::_Narrow_char_traits<char,int>::eq_int_type
 PUBLIC	?eof@?$_Narrow_char_traits@DH@std@@SAHXZ	; std::_Narrow_char_traits<char,int>::eof
 PUBLIC	??0myclass@@QEAA@XZ				; myclass::myclass
-PUBLIC	??1myclass@@QEAA@XZ				; myclass::~myclass
-PUBLIC	??2myclass@@SAPEAX_K@Z				; myclass::operator new
-PUBLIC	??3myclass@@SAXPEAX@Z				; myclass::operator delete
-PUBLIC	?location@myclass@@QEAAXXZ			; myclass::location
-PUBLIC	??_Gmyclass@@QEAAPEAXI@Z			; myclass::`scalar deleting destructor'
 PUBLIC	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
 PUBLIC	??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
 PUBLIC	main
@@ -88,18 +79,9 @@ PUBLIC	??0sentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@AEAV12@@Z ; s
 PUBLIC	??1sentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@XZ ; std::basic_ostream<char,std::char_traits<char> >::sentry::~sentry
 PUBLIC	??Bsentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEBA_NXZ ; std::basic_ostream<char,std::char_traits<char> >::sentry::operator bool
 PUBLIC	__JustMyCode_Default
-PUBLIC	??_R0?AVexception@std@@@8			; std::exception `RTTI Type Descriptor'
-PUBLIC	??_C@_05JGDHABO@c?8tor@				; `string'
-PUBLIC	??_C@_05BEGGEAKG@d?8tor@			; `string'
-PUBLIC	??_C@_0BE@CIIOHJBC@operator?5new?5called@	; `string'
-PUBLIC	??_C@_0BH@GGIFLHLI@operator?5delete?5called@	; `string'
-PUBLIC	??_C@_0BI@LCMKPIAN@Obj?5created?5on?5the?5heap@	; `string'
-PUBLIC	??_C@_0BM@EJIBELOD@obj?5NOT?5created?5on?5the?5heap@ ; `string'
-PUBLIC	??_C@_0M@KDEACOCM@Exception?3?5@		; `string'
-PUBLIC	??_C@_0CD@OMKKBJJ@?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9@ ; `string'
-EXTRN	?__global_delete@@YAXPEAX_K@Z:PROC		; __global_delete
-EXTRN	__imp_free:PROC
-EXTRN	__imp_malloc:PROC
+PUBLIC	??_C@_04EAOGCDPK@?5z?3?5@			; `string'
+PUBLIC	??_C@_04FCFDIMBE@?5y?3?5@			; `string'
+PUBLIC	??_C@_03MMEIOMHE@x?3?5@				; `string'
 EXTRN	?uncaught_exceptions@std@@YAHXZ:PROC		; std::uncaught_exceptions
 EXTRN	__imp_?good@ios_base@std@@QEBA_NXZ:PROC
 EXTRN	__imp_?flags@ios_base@std@@QEBAHXZ:PROC
@@ -114,6 +96,7 @@ EXTRN	__imp_?fill@?$basic_ios@DU?$char_traits@D@std@@@std@@QEBADXZ:PROC
 EXTRN	__imp_?widen@?$basic_ios@DU?$char_traits@D@std@@@std@@QEBADD@Z:PROC
 EXTRN	__imp_?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAXXZ:PROC
 EXTRN	__imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z:PROC
+EXTRN	__imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@H@Z:PROC
 EXTRN	__imp_?put@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV12@D@Z:PROC
 EXTRN	__imp_?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV12@XZ:PROC
 EXTRN	_RTC_CheckStackVars:PROC
@@ -121,11 +104,10 @@ EXTRN	_RTC_InitBase:PROC
 EXTRN	_RTC_Shutdown:PROC
 EXTRN	__CheckForDebuggerJustMyCode:PROC
 EXTRN	__CxxFrameHandler4:PROC
+EXTRN	__GSHandlerCheck:PROC
 EXTRN	__GSHandlerCheck_EH4:PROC
 EXTRN	__security_check_cookie:PROC
-EXTRN	??_7type_info@@6B@:BYTE				; type_info::`vftable'
 EXTRN	__imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A:BYTE
-EXTRN	__imp_?cerr@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A:BYTE
 EXTRN	__security_cookie:QWORD
 ;	COMDAT pdata
 pdata	SEGMENT
@@ -172,38 +154,8 @@ pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
 $pdata$??0myclass@@QEAA@XZ DD imagerel $LN3
-	DD	imagerel $LN3+117
+	DD	imagerel $LN3+302
 	DD	imagerel $unwind$??0myclass@@QEAA@XZ
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$??1myclass@@QEAA@XZ DD imagerel $LN3
-	DD	imagerel $LN3+88
-	DD	imagerel $unwind$??1myclass@@QEAA@XZ
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$??2myclass@@SAPEAX_K@Z DD imagerel $LN3
-	DD	imagerel $LN3+107
-	DD	imagerel $unwind$??2myclass@@SAPEAX_K@Z
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$??3myclass@@SAXPEAX@Z DD imagerel $LN3
-	DD	imagerel $LN3+101
-	DD	imagerel $unwind$??3myclass@@SAXPEAX@Z
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$?location@myclass@@QEAAXXZ DD imagerel $LN5
-	DD	imagerel $LN5+149
-	DD	imagerel $unwind$?location@myclass@@QEAAXXZ
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$??_Gmyclass@@QEAAPEAXI@Z DD imagerel $LN7
-	DD	imagerel $LN7+109
-	DD	imagerel $unwind$??_Gmyclass@@QEAAPEAXI@Z
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
@@ -231,27 +183,9 @@ $pdata$??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_trait
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$main DD	imagerel $LN16
-	DD	imagerel $LN16+438
+$pdata$main DD	imagerel $LN3
+	DD	imagerel $LN3+117
 	DD	imagerel $unwind$main
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$main$dtor$0 DD imagerel main$dtor$0
-	DD	imagerel main$dtor$0+39
-	DD	imagerel $unwind$main$dtor$0
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$main$catch$2 DD imagerel main$catch$2
-	DD	imagerel main$catch$2+129
-	DD	imagerel $unwind$main$catch$2
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
-$pdata$main$dtor$1 DD imagerel main$dtor$1
-	DD	imagerel main$dtor$1+36
-	DD	imagerel $unwind$main$dtor$1
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
@@ -297,47 +231,18 @@ rtc$TMZ	ENDS
 rtc$IMZ	SEGMENT
 _RTC_InitBase.rtc$IMZ DQ FLAT:_RTC_InitBase
 rtc$IMZ	ENDS
-;	COMDAT ??_C@_0CD@OMKKBJJ@?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9@
+;	COMDAT ??_C@_03MMEIOMHE@x?3?5@
 CONST	SEGMENT
-??_C@_0CD@OMKKBJJ@?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9@ DB '-'
-	DB	'---------------------------------', 00H	; `string'
+??_C@_03MMEIOMHE@x?3?5@ DB 'x: ', 00H			; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0M@KDEACOCM@Exception?3?5@
+;	COMDAT ??_C@_04FCFDIMBE@?5y?3?5@
 CONST	SEGMENT
-??_C@_0M@KDEACOCM@Exception?3?5@ DB 'Exception: ', 00H	; `string'
+??_C@_04FCFDIMBE@?5y?3?5@ DB ' y: ', 00H		; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0BM@EJIBELOD@obj?5NOT?5created?5on?5the?5heap@
+;	COMDAT ??_C@_04EAOGCDPK@?5z?3?5@
 CONST	SEGMENT
-??_C@_0BM@EJIBELOD@obj?5NOT?5created?5on?5the?5heap@ DB 'obj NOT created '
-	DB	'on the heap', 00H				; `string'
+??_C@_04EAOGCDPK@?5z?3?5@ DB ' z: ', 00H		; `string'
 CONST	ENDS
-;	COMDAT ??_C@_0BI@LCMKPIAN@Obj?5created?5on?5the?5heap@
-CONST	SEGMENT
-??_C@_0BI@LCMKPIAN@Obj?5created?5on?5the?5heap@ DB 'Obj created on the he'
-	DB	'ap', 00H					; `string'
-CONST	ENDS
-;	COMDAT ??_C@_0BH@GGIFLHLI@operator?5delete?5called@
-CONST	SEGMENT
-??_C@_0BH@GGIFLHLI@operator?5delete?5called@ DB 'operator delete called', 00H ; `string'
-CONST	ENDS
-;	COMDAT ??_C@_0BE@CIIOHJBC@operator?5new?5called@
-CONST	SEGMENT
-??_C@_0BE@CIIOHJBC@operator?5new?5called@ DB 'operator new called', 00H ; `string'
-CONST	ENDS
-;	COMDAT ??_C@_05BEGGEAKG@d?8tor@
-CONST	SEGMENT
-??_C@_05BEGGEAKG@d?8tor@ DB 'd''tor', 00H		; `string'
-CONST	ENDS
-;	COMDAT ??_C@_05JGDHABO@c?8tor@
-CONST	SEGMENT
-??_C@_05JGDHABO@c?8tor@ DB 'c''tor', 00H		; `string'
-CONST	ENDS
-;	COMDAT ??_R0?AVexception@std@@@8
-data$r	SEGMENT
-??_R0?AVexception@std@@@8 DQ FLAT:??_7type_info@@6B@	; std::exception `RTTI Type Descriptor'
-	DQ	0000000000000000H
-	DB	'.?AVexception@std@@', 00H
-data$r	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
 $unwind$??Bsentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEBA_NXZ DD 025051301H
@@ -436,122 +341,30 @@ $unwind$??0_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@AEAV12
 xdata	ENDS
 ;	COMDAT voltbl
 voltbl	SEGMENT
-_volmd	DB	00H
-	DB	05H
+_volmd	DB	02aH
+	DB	05cH
 voltbl	ENDS
-;	COMDAT voltbl
-voltbl	SEGMENT
-_volmd	DB	00H
-	DB	05H
-voltbl	ENDS
-;	COMDAT voltbl
-voltbl	SEGMENT
-_volmd	DB	00H
-	DB	05H
-voltbl	ENDS
-;	COMDAT voltbl
-voltbl	SEGMENT
-_volmd	DW	02aH
-	DW	019dH
-voltbl	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$main$dtor$1 DD 031001H
-	DD	0700c4210H
-	DD	0500bH
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$main$catch$2 DD 031001H
-	DD	0700c4210H
-	DD	0500bH
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$main$dtor$0 DD 031001H
-	DD	0700c4210H
-	DD	0500bH
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$ip2state$main DB 0eH
-	DB	00H
-	DB	00H
-	DB	08aH
-	DB	02H
-	DB	'>'
-	DB	04H
-	DB	08cH
-	DB	02H
-	DB	016H
-	DB	00H
-	DB	011H, 02H
-	DB	08H
-	DB	082H
-	DB	00H
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$handlerMap$main DB 02H
-	DB	07H
-	DB	012H
-	DD	imagerel ??_R0?AVexception@std@@@8
-	DB	090H
-	DD	imagerel main$catch$2
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$tryMap$main DB	02H
-	DB	00H
-	DB	02H
-	DB	04H
-	DD	imagerel $handlerMap$main
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$stateUnwindMap$main DB 08H
-	DB	08H
-	DB	0eH
-	DD	imagerel main$dtor$0
-	DB	038H
-	DB	046H
-	DD	imagerel main$dtor$1
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$cppxdata$main DB 038H
-	DD	imagerel $stateUnwindMap$main
-	DD	imagerel $tryMap$main
-	DD	imagerel $ip2state$main
-xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
 $unwind$main DD	025053119H
 	DD	010a230fH
-	DD	07003003dH
+	DD	070030023H
 	DD	05002H
-	DD	imagerel __GSHandlerCheck_EH4
-	DD	imagerel $cppxdata$main
-	DD	01d3H
+	DD	imagerel __GSHandlerCheck
+	DD	0108H
 xdata	ENDS
 ;	COMDAT CONST
 CONST	SEGMENT
-main$rtcName$0 DB 065H
-	DB	00H
-	ORG $+2
-main$rtcName$1 DB 06fH
+main$rtcName$0 DB 06fH
 	DB	062H
 	DB	06aH
 	DB	00H
-	ORG $+8
-main$rtcVarDesc DD 064H
-	DD	01H
-	DQ	FLAT:main$rtcName$1
-	DD	048H
-	DD	08H
+	ORG $+12
+main$rtcVarDesc DD 028H
+	DD	0cH
 	DQ	FLAT:main$rtcName$0
-	ORG $+96
-main$rtcFrameData DD 02H
+	ORG $+48
+main$rtcFrameData DD 01H
 	DD	00H
 	DQ	FLAT:main$rtcVarDesc
 CONST	ENDS
@@ -660,70 +473,9 @@ CONST	SEGMENT
 CONST	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
-$unwind$??_Gmyclass@@QEAAPEAXI@Z DD 025051701H
-	DD	01122317H
-	DD	0700b001dH
-	DD	0500aH
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$?location@myclass@@QEAAXXZ DD 025051301H
-	DD	010e2313H
-	DD	07007001fH
-	DD	05006H
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$ip2state$??3myclass@@SAXPEAX@Z DB 02H
-	DB	00H
-	DB	00H
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$cppxdata$??3myclass@@SAXPEAX@Z DB 060H
-	DD	imagerel $ip2state$??3myclass@@SAXPEAX@Z
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$??3myclass@@SAXPEAX@Z DD 025051319H
-	DD	010e2313H
-	DD	07007001fH
-	DD	05006H
-	DD	imagerel __CxxFrameHandler4
-	DD	imagerel $cppxdata$??3myclass@@SAXPEAX@Z
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$??2myclass@@SAPEAX_K@Z DD 025051301H
-	DD	010e2313H
-	DD	07007001fH
-	DD	05006H
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$ip2state$??1myclass@@QEAA@XZ DB 02H
-	DB	00H
-	DB	00H
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$cppxdata$??1myclass@@QEAA@XZ DB 060H
-	DD	imagerel $ip2state$??1myclass@@QEAA@XZ
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$??1myclass@@QEAA@XZ DD 025051319H
-	DD	010e2313H
-	DD	07007001fH
-	DD	05006H
-	DD	imagerel __CxxFrameHandler4
-	DD	imagerel $cppxdata$??1myclass@@QEAA@XZ
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
 $unwind$??0myclass@@QEAA@XZ DD 025051301H
 	DD	010e2313H
-	DD	07007001fH
+	DD	070070025H
 	DD	05006H
 xdata	ENDS
 ;	COMDAT xdata
@@ -1153,154 +905,38 @@ $LN2@Sentry_bas:
 ??0_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@AEAV12@@Z ENDP ; std::basic_ostream<char,std::char_traits<char> >::_Sentry_base::_Sentry_base
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
+; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\9_Order_of_initialization.cpp
 ;	COMDAT main
 _TEXT	SEGMENT
-pMyclass$ = 8
-e$5 = 40
-obj$ = 68
-$T6 = 296
-$T7 = 328
-$T8 = 360
-$T9 = 388
-tv154 = 408
-tv149 = 408
-tv138 = 408
-tv130 = 408
-tv85 = 408
-tv155 = 416
-tv87 = 416
-tv92 = 424
-tv74 = 424
-__$ArrayPad$ = 432
+obj$ = 8
+__$ArrayPad$ = 232
 main	PROC						; COMDAT
 
-; 78   : {
+; 22   : {
 
-$LN16:
+$LN3:
 	push	rbp
 	push	rdi
-	sub	rsp, 488				; 000001e8H
+	sub	rsp, 280				; 00000118H
 	lea	rbp, QWORD PTR [rsp+32]
 	lea	rdi, QWORD PTR [rsp+32]
-	mov	ecx, 66					; 00000042H
+	mov	ecx, 14
 	mov	eax, -858993460				; ccccccccH
 	rep stosd
 	mov	rax, QWORD PTR __security_cookie
 	xor	rax, rbp
 	mov	QWORD PTR __$ArrayPad$[rbp], rax
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
+	lea	rcx, OFFSET FLAT:__5D17BE46_9_Order_of_initialization@cpp
 	call	__CheckForDebuggerJustMyCode
 
-; 79   :     myclass* pMyclass = nullptr;
-
-	mov	QWORD PTR pMyclass$[rbp], 0
-
-; 80   :     try
-; 81   :     {
-; 82   :         pMyclass = new myclass();
-
-	mov	ecx, 1
-	call	??2myclass@@SAPEAX_K@Z			; myclass::operator new
-	mov	QWORD PTR tv154[rbp], rax
-	mov	rax, QWORD PTR tv154[rbp]
-	mov	QWORD PTR $T7[rbp], rax
-	cmp	QWORD PTR $T7[rbp], 0
-	je	SHORT $LN5@main
-	mov	rcx, QWORD PTR $T7[rbp]
-	call	??0myclass@@QEAA@XZ			; myclass::myclass
-	mov	QWORD PTR tv155[rbp], rax
-	mov	rax, QWORD PTR tv155[rbp]
-	mov	QWORD PTR tv74[rbp], rax
-	jmp	SHORT $LN6@main
-$LN5@main:
-	mov	QWORD PTR tv74[rbp], 0
-$LN6@main:
-	mov	rax, QWORD PTR tv74[rbp]
-	mov	QWORD PTR $T6[rbp], rax
-	mov	rax, QWORD PTR $T6[rbp]
-	mov	QWORD PTR pMyclass$[rbp], rax
-	jmp	SHORT $LN13@main
-$LN14@main:
-$LN13@main:
-
-; 83   :     }
-; 84   :     catch (const std::exception& e)
-; 85   :     {
-; 86   :         cerr << "Exception: " << e.what() << endl;
-; 87   :     }
-; 88   :     
-; 89   :     if (pMyclass)
-
-	cmp	QWORD PTR pMyclass$[rbp], 0
-	je	SHORT $LN3@main
-
-; 90   :     {
-; 91   :         // Check of the object is created on the heap
-; 92   :         pMyclass->location();
-
-	mov	rcx, QWORD PTR pMyclass$[rbp]
-	call	?location@myclass@@QEAAXXZ		; myclass::location
-
-; 93   :         delete pMyclass;
-
-	mov	rax, QWORD PTR pMyclass$[rbp]
-	mov	QWORD PTR $T8[rbp], rax
-	cmp	QWORD PTR $T8[rbp], 0
-	je	SHORT $LN7@main
-	mov	edx, 1
-	mov	rcx, QWORD PTR $T8[rbp]
-	call	??_Gmyclass@@QEAAPEAXI@Z
-	mov	QWORD PTR tv130[rbp], rax
-	jmp	SHORT $LN3@main
-$LN7@main:
-	mov	QWORD PTR tv130[rbp], 0
-$LN3@main:
-
-; 94   :     }
-; 95   :     cout << "----------------------------------" << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0CD@OMKKBJJ@?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9@
-	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv138[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv138[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-
-; 96   :     myclass obj;
+; 23   :     myclass obj;
 
 	lea	rcx, QWORD PTR obj$[rbp]
 	call	??0myclass@@QEAA@XZ			; myclass::myclass
-	npad	1
 
-; 97   :     obj.location();
+; 24   : }
 
-	lea	rcx, QWORD PTR obj$[rbp]
-	call	?location@myclass@@QEAAXXZ		; myclass::location
-
-; 98   :     cout << "----------------------------------" << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0CD@OMKKBJJ@?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9@
-	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv149[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv149[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-
-; 99   : 
-; 100  :     // myclass* pArrObj = new myclass[5];   // doesn't allow as we have restricted/
-; 101  : 
-; 102  :     return 0;
-
-	mov	DWORD PTR $T9[rbp], 0
-	lea	rcx, QWORD PTR obj$[rbp]
-	call	??1myclass@@QEAA@XZ			; myclass::~myclass
-	mov	eax, DWORD PTR $T9[rbp]
-
-; 103  : }
-
+	xor	eax, eax
 	mov	edi, eax
 	lea	rcx, QWORD PTR [rbp-32]
 	lea	rdx, OFFSET FLAT:main$rtcFrameData
@@ -1309,282 +945,12 @@ $LN3@main:
 	mov	rcx, QWORD PTR __$ArrayPad$[rbp]
 	xor	rcx, rbp
 	call	__security_check_cookie
-	lea	rsp, QWORD PTR [rbp+456]
+	lea	rsp, QWORD PTR [rbp+248]
 	pop	rdi
 	pop	rbp
 	ret	0
 main	ENDP
 _TEXT	ENDS
-;	COMDAT text$x
-text$x	SEGMENT
-pMyclass$ = 8
-e$5 = 40
-obj$ = 68
-$T6 = 296
-$T7 = 328
-$T8 = 360
-$T9 = 388
-tv154 = 408
-tv149 = 408
-tv138 = 408
-tv130 = 408
-tv85 = 408
-tv155 = 416
-tv87 = 416
-tv92 = 424
-tv74 = 424
-__$ArrayPad$ = 432
-main$dtor$0 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	mov	rcx, QWORD PTR $T7[rbp]
-	call	??3myclass@@SAXPEAX@Z			; myclass::operator delete
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$0 ENDP
-text$x	ENDS
-;	COMDAT text$x
-text$x	SEGMENT
-pMyclass$ = 8
-e$5 = 40
-obj$ = 68
-$T6 = 296
-$T7 = 328
-$T8 = 360
-$T9 = 388
-tv154 = 408
-tv149 = 408
-tv138 = 408
-tv130 = 408
-tv85 = 408
-tv155 = 416
-tv87 = 416
-tv92 = 424
-tv74 = 424
-__$ArrayPad$ = 432
-main$catch$2 PROC
-
-; 83   :     }
-; 84   :     catch (const std::exception& e)
-; 85   :     {
-
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-__catch$main$0:
-
-; 83   :     }
-; 84   :     catch (const std::exception& e)
-; 85   :     {
-; 86   :         cerr << "Exception: " << e.what() << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0M@KDEACOCM@Exception?3?5@
-	mov	rcx, QWORD PTR __imp_?cerr@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv85[rbp], rax
-	mov	rax, QWORD PTR e$5[rbp]
-	mov	rax, QWORD PTR [rax]
-	mov	rcx, QWORD PTR e$5[rbp]
-	call	QWORD PTR [rax+8]
-	mov	QWORD PTR tv87[rbp], rax
-	mov	rdx, QWORD PTR tv87[rbp]
-	mov	rcx, QWORD PTR tv85[rbp]
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv92[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv92[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-	npad	1
-
-; 83   :     }
-; 84   :     catch (const std::exception& e)
-; 85   :     {
-; 86   :         cerr << "Exception: " << e.what() << endl;
-; 87   :     }
-
-	lea	rax, $LN14@main$catch
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-	int	3
-main$catch$2 ENDP
-text$x	ENDS
-;	COMDAT text$x
-text$x	SEGMENT
-pMyclass$ = 8
-e$5 = 40
-obj$ = 68
-$T6 = 296
-$T7 = 328
-$T8 = 360
-$T9 = 388
-tv154 = 408
-tv149 = 408
-tv138 = 408
-tv130 = 408
-tv85 = 408
-tv155 = 416
-tv87 = 416
-tv92 = 424
-tv74 = 424
-__$ArrayPad$ = 432
-main$dtor$1 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR obj$[rbp]
-	call	??1myclass@@QEAA@XZ			; myclass::~myclass
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$1 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-pMyclass$ = 8
-e$5 = 40
-obj$ = 68
-$T6 = 296
-$T7 = 328
-$T8 = 360
-$T9 = 388
-tv154 = 408
-tv149 = 408
-tv138 = 408
-tv130 = 408
-tv85 = 408
-tv155 = 416
-tv87 = 416
-tv92 = 424
-tv74 = 424
-__$ArrayPad$ = 432
-main$dtor$0 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	mov	rcx, QWORD PTR $T7[rbp]
-	call	??3myclass@@SAXPEAX@Z			; myclass::operator delete
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$0 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-pMyclass$ = 8
-e$5 = 40
-obj$ = 68
-$T6 = 296
-$T7 = 328
-$T8 = 360
-$T9 = 388
-tv154 = 408
-tv149 = 408
-tv138 = 408
-tv130 = 408
-tv85 = 408
-tv155 = 416
-tv87 = 416
-tv92 = 424
-tv74 = 424
-__$ArrayPad$ = 432
-main$catch$2 PROC
-
-; 85   :     {
-
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-__catch$main$0:
-
-; 86   :         cerr << "Exception: " << e.what() << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0M@KDEACOCM@Exception?3?5@
-	mov	rcx, QWORD PTR __imp_?cerr@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv85[rbp], rax
-	mov	rax, QWORD PTR e$5[rbp]
-	mov	rax, QWORD PTR [rax]
-	mov	rcx, QWORD PTR e$5[rbp]
-	call	QWORD PTR [rax+8]
-	mov	QWORD PTR tv87[rbp], rax
-	mov	rdx, QWORD PTR tv87[rbp]
-	mov	rcx, QWORD PTR tv85[rbp]
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv92[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv92[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-	npad	1
-
-; 87   :     }
-
-	lea	rax, $LN14@main$catch
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-	int	3
-main$catch$2 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-pMyclass$ = 8
-e$5 = 40
-obj$ = 68
-$T6 = 296
-$T7 = 328
-$T8 = 360
-$T9 = 388
-tv154 = 408
-tv149 = 408
-tv138 = 408
-tv130 = 408
-tv85 = 408
-tv155 = 416
-tv87 = 416
-tv92 = 424
-tv74 = 424
-__$ArrayPad$ = 432
-main$dtor$1 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR obj$[rbp]
-	call	??1myclass@@QEAA@XZ			; myclass::~myclass
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$1 ENDP
-text$x	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
 ; File C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\ostream
 ;	COMDAT ??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z
@@ -2246,273 +1612,84 @@ __catch$??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D
 ?catch$1@?0???$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z@4HA ENDP ; `std::operator<<<std::char_traits<char> >'::`1'::catch$1
 text$x	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT ??_Gmyclass@@QEAAPEAXI@Z
-_TEXT	SEGMENT
-this$ = 224
-__flags$ = 232
-??_Gmyclass@@QEAAPEAXI@Z PROC				; myclass::`scalar deleting destructor', COMDAT
-$LN7:
-	mov	DWORD PTR [rsp+16], edx
-	mov	QWORD PTR [rsp+8], rcx
-	push	rbp
-	push	rdi
-	sub	rsp, 232				; 000000e8H
-	lea	rbp, QWORD PTR [rsp+32]
-	mov	rcx, QWORD PTR this$[rbp]
-	call	??1myclass@@QEAA@XZ			; myclass::~myclass
-	mov	eax, DWORD PTR __flags$[rbp]
-	and	eax, 1
-	test	eax, eax
-	je	SHORT $LN2@scalar
-	mov	eax, DWORD PTR __flags$[rbp]
-	and	eax, 4
-	test	eax, eax
-	jne	SHORT $LN3@scalar
-	mov	rcx, QWORD PTR this$[rbp]
-	call	??3myclass@@SAXPEAX@Z			; myclass::operator delete
-	jmp	SHORT $LN2@scalar
-$LN3@scalar:
-	mov	edx, 1
-	mov	rcx, QWORD PTR this$[rbp]
-	call	?__global_delete@@YAXPEAX_K@Z		; __global_delete
-$LN2@scalar:
-	mov	rax, QWORD PTR this$[rbp]
-	lea	rsp, QWORD PTR [rbp+200]
-	pop	rdi
-	pop	rbp
-	ret	0
-??_Gmyclass@@QEAAPEAXI@Z ENDP				; myclass::`scalar deleting destructor'
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
-;	COMDAT ?location@myclass@@QEAAXXZ
-_TEXT	SEGMENT
-tv81 = 192
-tv74 = 192
-this$ = 240
-?location@myclass@@QEAAXXZ PROC				; myclass::location, COMDAT
-
-; 49   :     {
-
-$LN5:
-	mov	QWORD PTR [rsp+8], rcx
-	push	rbp
-	push	rdi
-	sub	rsp, 248				; 000000f8H
-	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
-	call	__CheckForDebuggerJustMyCode
-
-; 50   :         if (m_bisOnHeap)
-
-	mov	rax, QWORD PTR this$[rbp]
-	movzx	eax, BYTE PTR [rax]
-	test	eax, eax
-	je	SHORT $LN2@location
-
-; 51   :             cout << "Obj created on the heap" << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0BI@LCMKPIAN@Obj?5created?5on?5the?5heap@
-	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv74[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv74[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-	jmp	SHORT $LN3@location
-$LN2@location:
-
-; 52   :         else
-; 53   :             cout << "obj NOT created on the heap" << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0BM@EJIBELOD@obj?5NOT?5created?5on?5the?5heap@
-	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv81[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv81[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-$LN3@location:
-
-; 54   :     }
-
-	lea	rsp, QWORD PTR [rbp+216]
-	pop	rdi
-	pop	rbp
-	ret	0
-?location@myclass@@QEAAXXZ ENDP				; myclass::location
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
-;	COMDAT ??3myclass@@SAXPEAX@Z
-_TEXT	SEGMENT
-tv71 = 192
-pv$ = 240
-??3myclass@@SAXPEAX@Z PROC				; myclass::operator delete, COMDAT
-
-; 43   :     {
-
-$LN3:
-	mov	QWORD PTR [rsp+8], rcx
-	push	rbp
-	push	rdi
-	sub	rsp, 248				; 000000f8H
-	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
-	call	__CheckForDebuggerJustMyCode
-
-; 44   :         cout << "operator delete called" << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0BH@GGIFLHLI@operator?5delete?5called@
-	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv71[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv71[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-
-; 45   :         free(pv);
-
-	mov	rcx, QWORD PTR pv$[rbp]
-	call	QWORD PTR __imp_free
-	npad	1
-
-; 46   :     }
-
-	lea	rsp, QWORD PTR [rbp+216]
-	pop	rdi
-	pop	rbp
-	ret	0
-??3myclass@@SAXPEAX@Z ENDP				; myclass::operator delete
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
-;	COMDAT ??2myclass@@SAPEAX_K@Z
-_TEXT	SEGMENT
-tv71 = 192
-size$ = 240
-??2myclass@@SAPEAX_K@Z PROC				; myclass::operator new, COMDAT
-
-; 34   :     {
-
-$LN3:
-	mov	QWORD PTR [rsp+8], rcx
-	push	rbp
-	push	rdi
-	sub	rsp, 248				; 000000f8H
-	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
-	call	__CheckForDebuggerJustMyCode
-
-; 35   :         cout << "operator new called" << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_0BE@CIIOHJBC@operator?5new?5called@
-	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv71[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv71[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-
-; 36   :         gHeap = true;
-
-	mov	BYTE PTR ?gHeap@myclass@@0_NA, 1	; myclass::gHeap
-
-; 37   :         return malloc(size);
-
-	mov	rcx, QWORD PTR size$[rbp]
-	call	QWORD PTR __imp_malloc
-
-; 38   :     }
-
-	lea	rsp, QWORD PTR [rbp+216]
-	pop	rdi
-	pop	rbp
-	ret	0
-??2myclass@@SAPEAX_K@Z ENDP				; myclass::operator new
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
-;	COMDAT ??1myclass@@QEAA@XZ
-_TEXT	SEGMENT
-tv71 = 192
-this$ = 240
-??1myclass@@QEAA@XZ PROC				; myclass::~myclass, COMDAT
-
-; 25   :     {
-
-$LN3:
-	mov	QWORD PTR [rsp+8], rcx
-	push	rbp
-	push	rdi
-	sub	rsp, 248				; 000000f8H
-	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
-	call	__CheckForDebuggerJustMyCode
-
-; 26   :         cout << "d'tor" << endl;
-
-	lea	rdx, OFFSET FLAT:??_C@_05BEGGEAKG@d?8tor@
-	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
-	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv71[rbp], rax
-	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv71[rbp]
-	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
-	npad	1
-
-; 27   :         // throw 1;	// Do not throw exception from d'tor. Program will crash.
-; 28   :     }
-
-	lea	rsp, QWORD PTR [rbp+216]
-	pop	rdi
-	pop	rbp
-	ret	0
-??1myclass@@QEAA@XZ ENDP				; myclass::~myclass
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
+; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\9_Order_of_initialization.cpp
 ;	COMDAT ??0myclass@@QEAA@XZ
 _TEXT	SEGMENT
-tv72 = 192
-this$ = 240
+tv83 = 192
+tv81 = 200
+tv92 = 208
+tv90 = 216
+tv133 = 224
+tv131 = 232
+tv138 = 240
+this$ = 288
 ??0myclass@@QEAA@XZ PROC				; myclass::myclass, COMDAT
 
-; 19   :     {
+; 15   :     {
 
 $LN3:
 	mov	QWORD PTR [rsp+8], rcx
 	push	rbp
 	push	rdi
-	sub	rsp, 248				; 000000f8H
+	sub	rsp, 296				; 00000128H
 	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
+	lea	rcx, OFFSET FLAT:__5D17BE46_9_Order_of_initialization@cpp
 	call	__CheckForDebuggerJustMyCode
 
-; 18   :     myclass() : m_bisOnHeap(gHeap)
+; 14   :     myclass() : z(10), y(z), x(y) 
 
 	mov	rax, QWORD PTR this$[rbp]
-	movzx	ecx, BYTE PTR ?gHeap@myclass@@0_NA	; myclass::gHeap
-	mov	BYTE PTR [rax], cl
+	mov	rcx, QWORD PTR this$[rbp]
+	mov	ecx, DWORD PTR [rcx+4]
+	mov	DWORD PTR [rax], ecx
+	mov	rax, QWORD PTR this$[rbp]
+	mov	rcx, QWORD PTR this$[rbp]
+	mov	ecx, DWORD PTR [rcx+8]
+	mov	DWORD PTR [rax+4], ecx
+	mov	rax, QWORD PTR this$[rbp]
+	mov	DWORD PTR [rax+8], 10
 
-; 20   :         cout << "c'tor" << endl;
+; 16   :         cout << "x: " << x << " y: " << y << " z: " << z << endl;
 
-	lea	rdx, OFFSET FLAT:??_C@_05JGDHABO@c?8tor@
+	lea	rdx, OFFSET FLAT:??_C@_03MMEIOMHE@x?3?5@
 	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
 	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
-	mov	QWORD PTR tv72[rbp], rax
+	mov	QWORD PTR tv83[rbp], rax
+	mov	rax, QWORD PTR this$[rbp]
+	mov	eax, DWORD PTR [rax]
+	mov	DWORD PTR tv81[rbp], eax
+	mov	edx, DWORD PTR tv81[rbp]
+	mov	rcx, QWORD PTR tv83[rbp]
+	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@H@Z
+	lea	rdx, OFFSET FLAT:??_C@_04FCFDIMBE@?5y?3?5@
+	mov	rcx, rax
+	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
+	mov	QWORD PTR tv92[rbp], rax
+	mov	rax, QWORD PTR this$[rbp]
+	mov	eax, DWORD PTR [rax+4]
+	mov	DWORD PTR tv90[rbp], eax
+	mov	edx, DWORD PTR tv90[rbp]
+	mov	rcx, QWORD PTR tv92[rbp]
+	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@H@Z
+	lea	rdx, OFFSET FLAT:??_C@_04EAOGCDPK@?5z?3?5@
+	mov	rcx, rax
+	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
+	mov	QWORD PTR tv133[rbp], rax
+	mov	rax, QWORD PTR this$[rbp]
+	mov	eax, DWORD PTR [rax+8]
+	mov	DWORD PTR tv131[rbp], eax
+	mov	edx, DWORD PTR tv131[rbp]
+	mov	rcx, QWORD PTR tv133[rbp]
+	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@H@Z
+	mov	QWORD PTR tv138[rbp], rax
 	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
-	mov	rcx, QWORD PTR tv72[rbp]
+	mov	rcx, QWORD PTR tv138[rbp]
 	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
 
-; 21   :         gHeap = false;
-
-	mov	BYTE PTR ?gHeap@myclass@@0_NA, 0	; myclass::gHeap
-
-; 22   :     }
+; 17   :     }
 
 	mov	rax, QWORD PTR this$[rbp]
-	lea	rsp, QWORD PTR [rbp+216]
+	lea	rsp, QWORD PTR [rbp+264]
 	pop	rdi
 	pop	rbp
 	ret	0
@@ -2647,7 +1824,7 @@ $LL3@length:
 ?length@?$_Narrow_char_traits@DH@std@@SA_KQEBD@Z ENDP	; std::_Narrow_char_traits<char,int>::length
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
+; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\9_Order_of_initialization.cpp
 ;	COMDAT ?__empty_global_delete@@YAXPEAX_KW4align_val_t@std@@@Z
 _TEXT	SEGMENT
 __formal$ = 224
@@ -2663,7 +1840,7 @@ $LN3:
 	push	rdi
 	sub	rsp, 232				; 000000e8H
 	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
+	lea	rcx, OFFSET FLAT:__5D17BE46_9_Order_of_initialization@cpp
 	call	__CheckForDebuggerJustMyCode
 	lea	rsp, QWORD PTR [rbp+200]
 	pop	rdi
@@ -2672,7 +1849,7 @@ $LN3:
 ?__empty_global_delete@@YAXPEAX_KW4align_val_t@std@@@Z ENDP ; __empty_global_delete
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
+; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\9_Order_of_initialization.cpp
 ;	COMDAT ?__empty_global_delete@@YAXPEAXW4align_val_t@std@@@Z
 _TEXT	SEGMENT
 __formal$ = 224
@@ -2686,7 +1863,7 @@ $LN3:
 	push	rdi
 	sub	rsp, 232				; 000000e8H
 	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
+	lea	rcx, OFFSET FLAT:__5D17BE46_9_Order_of_initialization@cpp
 	call	__CheckForDebuggerJustMyCode
 	lea	rsp, QWORD PTR [rbp+200]
 	pop	rdi
@@ -2695,7 +1872,7 @@ $LN3:
 ?__empty_global_delete@@YAXPEAXW4align_val_t@std@@@Z ENDP ; __empty_global_delete
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
+; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\9_Order_of_initialization.cpp
 ;	COMDAT ?__empty_global_delete@@YAXPEAX_K@Z
 _TEXT	SEGMENT
 __formal$ = 224
@@ -2709,7 +1886,7 @@ $LN3:
 	push	rdi
 	sub	rsp, 232				; 000000e8H
 	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
+	lea	rcx, OFFSET FLAT:__5D17BE46_9_Order_of_initialization@cpp
 	call	__CheckForDebuggerJustMyCode
 	lea	rsp, QWORD PTR [rbp+200]
 	pop	rdi
@@ -2718,7 +1895,7 @@ $LN3:
 ?__empty_global_delete@@YAXPEAX_K@Z ENDP		; __empty_global_delete
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
-; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\8_new_operator_heap_obj_Creation.cpp
+; File E:\GitHub_Clone_Repository\Modern-CPP\Basic\9_Order_of_initialization.cpp
 ;	COMDAT ?__empty_global_delete@@YAXPEAX@Z
 _TEXT	SEGMENT
 __formal$ = 224
@@ -2730,7 +1907,7 @@ $LN3:
 	push	rdi
 	sub	rsp, 232				; 000000e8H
 	lea	rbp, QWORD PTR [rsp+32]
-	lea	rcx, OFFSET FLAT:__18F94146_8_new_operator_heap_obj_Creation@cpp
+	lea	rcx, OFFSET FLAT:__5D17BE46_9_Order_of_initialization@cpp
 	call	__CheckForDebuggerJustMyCode
 	lea	rsp, QWORD PTR [rbp+200]
 	pop	rdi

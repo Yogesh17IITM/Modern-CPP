@@ -17,6 +17,7 @@
 6. [Class Object Destruction](./Basic/6_rValue_and_DtorScope.cpp)
 7. [Exceptions and Vf table](./Basic/7_exception.cpp)
 8. [Heap object creation](./Basic/8_new_operator_heap_obj_Creation.cpp)
+9. [Order of initialization](./Basic/9_Order_of_initialization.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
