@@ -1,3 +1,10 @@
+/* TOPIC:
+*   - Smart pointer
+*   - 'explict' default c'tor
+*   - shared and uniq pointer replica
+*   - deep copying 
+*/
+
 #include<iostream>
 using namespace std;
 
