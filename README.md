@@ -3,7 +3,7 @@
 
 ### Configuration:
 - Visual Studio IDE 2019 (*Optional*)
-- C++ Language Standard: std::C++ 20
+- C++ Language Standard: ISO C++20 Standard (/std:c++20)
 - Assembly code Generation (Right Click on VS Solution > C/C++ > Output Files > Assembler Output --> Set Assembly with Source Code (/FAs)) (*Optional*)
 
 ### Contents
