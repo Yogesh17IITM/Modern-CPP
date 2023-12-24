@@ -19,6 +19,9 @@
 8. [Heap object creation](./Basic/8_new_operator_heap_obj_Creation.cpp)
 9. [Order of initialization](./Basic/9_Order_of_initialization.cpp)
 
+#### Intermediate
+1. [Smart Pointers (with deep copy handling)](./Intermediate/1_smart_pointer.cpp)
+
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
 
