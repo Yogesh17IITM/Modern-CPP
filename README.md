@@ -21,6 +21,8 @@
 
 #### Intermediate
 1. [Smart Pointers (with deep copy handling)](./Intermediate/1_smart_pointer.cpp)
+2. [Callback Function (Template Method design pattern)](./Intermediate/2_callback.cpp)
+3. [C++ Functors](./Intermediate/3_Functors.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
