@@ -69,7 +69,7 @@ public:
     /*smart(const smart&) = delete;
     smart& operator=(const smart& iObj) = delete;*/
         
-    // replica of shared pointer
+    // replica of "shared pointer" implementation
     smart(const smart& iObj) : m_ptr(iObj.m_ptr), m_count(iObj.m_count)
     {
         (*m_count)++;
@@ -83,13 +83,17 @@ public:
         this->m_count = iObj.m_count;
         (*m_count)++;
 
-        This doesn't delete the exiting 'this' pointer object which it holds.
-        Instead it overwrites on the existing one -> causes memory leak.
-        Hence, in this case, d'tor call doesn't happen.
+        Cannot delete the exiting 'this' pointer object which it holds.
+        since calling ~smart() from here is not allowed.
 
+        Instead it overwrites on the existing one -> causes memory leak.
+       
         // Case A: smart<classA> sp3(nullptr);
         // Case B: smart<classA> sp3(sp1);
-        // Case A and B behaves differently here. (i.e,) No d'tor call happens for case B
+        // Case A and B behaves differently here. 
+           i.e,)    d'tor call happens for case A but NOT for case B.
+                    since 'sp3(sp1) -> count++ and again sp3 = sp2 -> count++
+                    Count increases twice but no destruction happens for existing object.
         */
 
         // DEEP COPYING

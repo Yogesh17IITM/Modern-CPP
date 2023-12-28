@@ -24,6 +24,7 @@
 2. [Callback Function (Template Method design pattern)](./Intermediate/2_callback.cpp)
 3. [C++ Functors](./Intermediate/3_Functors.cpp)
 4. [Template Specialization and Constexpr](./Intermediate/4_Template_Specialization.cpp)
+5. [Move Constructor](./Intermediate/5_Move_Constructor.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
