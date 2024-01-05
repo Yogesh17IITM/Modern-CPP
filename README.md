@@ -5,6 +5,7 @@
 - Visual Studio IDE 2019 (*Optional*)
 - C++ Language Standard: ISO C++20 Standard (/std:c++20)
 - Assembly code Generation (Right Click on VS Solution > C/C++ > Output Files > Assembler Output --> Set Assembly with Source Code (/FAs)) (*Optional*)
+- In VS IDE, set the solution config to "Debug" and solution platform to 'x64'
 
 ### Contents
 
@@ -27,6 +28,10 @@
 5. [Move Constructor](./Intermediate/5_Move_Constructor.cpp)
 6. [Variadic template function](./Intermediate/6_variadic_Function_TemplatePack.cpp)
 7. [std::any datatype](./Intermediate/7_the_ANY_Datatype.cpp)
+
+#### Advanced
+1. [Type Inference](./Advanced/1_TypeInference.cpp)
+2. [Tuple](./Advanced/2_tuple.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
