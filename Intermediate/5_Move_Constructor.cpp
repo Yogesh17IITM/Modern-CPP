@@ -52,7 +52,7 @@ myclass Factory(int param)
 	
 	return myclass(param);	// behaves as if "myclass obj(param);"
 	// For the above implementation,
-	// when move c'tor is not implmented or not,
+	// whether move c'tor is not implmented or not,
 	//		destruction doesn't happen in this scope (but happens outside scope).
 
 }

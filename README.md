@@ -25,6 +25,8 @@
 3. [C++ Functors](./Intermediate/3_Functors.cpp)
 4. [Template Specialization and Constexpr](./Intermediate/4_Template_Specialization.cpp)
 5. [Move Constructor](./Intermediate/5_Move_Constructor.cpp)
+6. [Variadic template function](./Intermediate/6_variadic_Function_TemplatePack.cpp)
+7. [std::any datatype](./Intermediate/7_the_ANY_Datatype.cpp)
 
 ### Assembly Ouput
 Assembly output has been provided in 'asm/' folder. This helps to know how the C++ code has been interpreted in the backend.
