@@ -34,6 +34,8 @@
 2. [Tuple](./Advanced/2_tuple.cpp)
 3. [std::Map](./Advanced/3_std_map.cpp)
 4. [Designated Initializations](./Advanced/4_Designated_Initializations.cpp)
+5. [Enum class](./Advanced/5_enum_class.cpp)
+6. [std:: variant and std:: optional](./Advanced/6_std_variant_and_optional_type.cpp)
 
 #### Assembly Ouput
 Assembly output has been provided in 'asm/' folder (only for [Basic](#Basic)). This helps to know how the C++ code has been interpreted in the backend.
